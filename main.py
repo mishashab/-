@@ -25,18 +25,21 @@ def import_cooked_book_from_file(file_name):
 cook_book = import_cooked_book_from_file('recipes.txt')
 pprint(cook_book)
 
-#Задание 2
+
+# Задание 2
 def get_shop_list_by_dishes(dishes, person_count):
-    shopping_list = {}
+    shop_card = {}
     for dish in dishes:
+        ingredient = cook_book[dish]
+        for ingredient in ingredient:
+            if ingredient['ingredient_name'] in shop_card:
+                shop_card[ingredient['ingredient_name']]['quantity'] +=\
+                    ingredient['quantity'] * person_count
+            else:
+                shop_card[ingredient['ingredient_name']] = \
+                    {'quantity': ingredient['quantity'] * person_count,
+                     'measure': 'кг'}
+    return shop_card
 
-#        dish.ingredients = cook_book[dish]
-#        for ingredient_name, quantity, measure in dish.ingredients:
 
-#    if course in lecturer.lectures_grades:
-#        lecturer.lectures_grades[course] += [grade]
-#    else:
-#        lecturer.lectures_grades[course] = [grade]
-
-
-shopping_list = get_shop_list_by_dishes(['Запеченный картофель', 'Омлет'], 2)
+pprint(get_shop_list_by_dishes(['Запеченный картофель', 'Омлет'], 2))
